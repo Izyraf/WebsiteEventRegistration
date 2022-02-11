@@ -1,0 +1,39 @@
+﻿@page "/"
+
+
+
+<html>
+<head>
+   
+</head>
+<body>
+    <link href="css/StyleSheet.css" rel="stylesheet" />
+    <header id="picture">
+        <h1 style="font-family: sans-serif; background-color: bisque; border: 2px solid powderblue; border-radius: 5px; padding: 5px; text-align: center">
+
+        Make Events <br />
+            Join Events<br />
+            Easy<br />
+        </h1>
+        
+
+    </header>
+
+
+        <div class="row">
+            <div class="container">
+                <div class="column">
+                    <a href="/events/create/" target="_blank">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABMlBMVEX///8AAAD+6DP/60rXwQw8NxE9PT38//3//vz8/vr/7Ej//fT69bT7+ur76Tn+5yD94wDNzc2ioqK3t7fy3SkgICDW1tbs7Oz/4ABRUVG9vb0NDQ309PT487ZGRkb/9MIpKSk+Oys/PEUwMDA+NRX8//Y/PTVnZ2f/+/89Pzv/6lX68I6Pj488NhX86yz14wBcXFz684dra2v17VH27pKBgYGsrKwwKg/i4uL16FY4PEcYGBg6OQb58Z727mreyA378Yn394P7+NxjaHFsZ1YtMDtpYCT7++QxLQD/4T50YSz35537+M7z8o1kXydJQ0pCST/87ntCRVf95l1uZSE2LkamnyD3+a4wKTjcvBzUxQz6+br6/tMzKBk4NiDmwgKvmhM8NwBsZ0kvLCD/79DRy05of3wPAAAJf0lEQVR4nO2aDVsaSRKAO4B094wzgK6CBkKijragDAgaSQwqd8nEZMyGc6Mbk2xyt7n//xeuqoePAVETMOcDT71PHHoHVnitqq7uGRgjCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgiDtG3fcH+OVYprjvj/ArcRgrWvK+P8UvxJHq2LbkFAeRi4oRnWpDeWoUptjQYaJmF2zDklNaiI4Up0Y0ahgmn1JDpiqQosY0Gx5HIUWn1VCYzCxChkaB6TTkTBXtAcPsTva+P9YdIkWldAYJGjbciE+NoeCwVDOwBqMhw43VR1NjaDrqFLtENNozzO6sxqfHUIojY9AQBKfIUBTtgmH0GaLgtBhKpo7sMzvarsFoIVrw+AYKtg2xJie5fThcHYczFP81/6EFOzEUDoduMrmL8f4axGH9ny/XQ4bCYaapzPv+nCNjQpsI1SBQfxVEsBtDaZ76yrnnzzkakH5mDfpgNIRRf/d0vWsoITkt1rI9IfmYb8aVspgAWJDwOGz/UukIKTmUgiOZRIQp7yZnHB5sl3oJGjWqb16vra90YygdR7USeF1jbEPTBAvOpWkK5jh6yBRe1xN4aUEoeBSm/lHwtncztXF1pLdLIcPqq6czIUOoQdZInJTuwJChBL5poKYfscZxX8rxl3OMKDyH228l1N3MbBU7avfVYOHN6+2DcAwdEIxEjI7h4lyb/Xk4pBhbhofldOdsiuFxWb9sj+31TiPSrxSLxVqt9tZnaraItGYteEL5lUaj6DPmzRZrFV81i7XT4zu43mdKUSz0MhT7oFF993RmBmIY3wS/zZXfs5iikUikm6XzD9qktuCwy1gZHuYWO2fn2EM4PtIve8RWO6e38H/lIpdJIhk3Z/KWHiVdT0nVcDOA2+CyDq844jl46sQZe2rjjiiWjL4uYdRfoWDHcGXzfdZpJUrDDffgsMNYHMchwwU4Psziy5b0c32GyYwmmRO8oQdg6DhvXTiP/16wU3is8yMwbIxdFAxXMoU+wygKbvcM40/+lW25J5HhhstwKDNttD9g+GA/MLwSw6QWybizyqkHhkmfizqcdNHS5p8xwsqAJy7YeJOpgFo/1W3CaC9ksE28ej2z1hfD31sRu3TVsLyxUV5c1InI8L/T2nBpZ6M8HxjOL2vD3Y0l/fLyXscQOGuc1aG7RmEYgZ+ctCBHky3IWjfZNBMgq/BEU1ljGZqw2A7PofBTrf+hU7RruL7+4VzrDRo+1+uALIwWsnh8nNWGi/o3a8OtwBDmIZ2zwXtKnaUJD/sdN0vJTKIBUrOsCeFLeB5G12cQWjfnZpK2OWYMsU2E+iB2DBA86BnCPPPs5flXuzTMMK1/h47evo6kNkz1DDfmw4bpsKHrQdtzmAcWEay3F8wHQ/fCq8Ok7rMajFsulKHDxptLrVqpEFIsaMEgRduG68/+PD/8GBkaw3TXJZ3S1ThouLB3rWHCY3jl2QfDwguouiK3EiBawmUhNIg8lKqN4rjWHxmYho+MM7tvMYNtoiM4MwMhXH95HotdDjcM0g77RCqle8Zglj6Yu8YQ8tGXpqc4Tjpns6DS4tA4IEEjMOVw6TTdjO4i/jhTKd5divYvZIwqTDI91uJPNj+cX8ZisaGGmjTbxSllXk+g3bk01TYsX2vollzXbXKQc1uoWYCFALbDpJtXDndUNYktpTTeNMOOotGrS7Ww4fqzlfOvHy9vNsQ4zeFh+arhwrWG2C/AEBI0eeSjoXRYHisx436C6mEVjGCmMVYRmqeD26XCu6fbYcOZ+Or5YSx2SwxxuLWrtQYMn+vx0DoEMchDz6nBoOiBmW1BxX1KoFfisxLyk/4j1EbXg81s0e5ul1ATlmpvgkavOVhbW5tBwcvbDFFrF9Nxf9CwfJNhKeG6ed5IJpKzFtYlGEp18RtWX1UwiYWYcfOjC0oFgqHFKE4yf4RTdG3m4ODLt1ib4TPNfjqdDhpiOY5NMTBczqbTWW24e4NhIm95nmR1EMoxlLGYZ1kCWwYs4Tg3bUxYb/QY9m+XYFitv+lL0bWDv758O/x4eZNh+yPDcBWEVtngXDq3er0h1CAzTWbAOu0Tx5mn6ZdKkVKzCMNkHsqvgUvTMXZOleDuUm+Wqb+D7VKf4ZdvXy8vb4xh+yO3l51LbLAfLi9dZwiKHoPdoLDBo9BCw+86fE0rAhmcMwXHxXeFj9QswneXOjGs9s2iB9uQo4/Pv8ZiN2dp+yMH5YZbqIEYzu/eEEPPkY6AlZreZ8CJvF5tf3Zs3HOYjL+A041R/PrvLnW2S/1tYhtq8O9vIcFrDbPY9INyg3bYiSGeXeh0yeu6hS+EMJu4uNY7jcxbXJe6efMEZtkcG8swfHdpYLvUMTz462mvBq+fSxcWFh7ChmgrMFxuGz5fWHi+ERgu3jiXJhJFH+NWr56AZ8WJwNGuwirc/Q5r1lENoYRlLXoWTtGocfbmdWiphoYgGLu8LYaare44xXrdohwY6p3+oKGQOb3Bx6Ua7vZh+/ACWkODn+klDcqbsO3QhiOUoRRWLWJH7DD9bWJ75t8wyehGf/hjhm2v/SuGe3oSump4kQzIHIFhpsq8PIwLTDd5XLnVFFdBDEe5ieA0L/L95P7zMv4kTLy/Boca7oUM08GIhQyX9J5qj+080Nvj4A/SyVI16wYkWzWIZF1xOJEsOerCxrJ0jySIOadwrv7zfvqqHe9nZ/XJ5kqPYLt0m2E61QYilw1GrDtKpRbZIhzTbF+P2y/v7IBVc7b9x21aeT/nC8+EsQ9zq+nnL3wLLx0JZeU/fffFCDGUTF9t7qJ2VsFvM+A97Onf/4nbpdsMxwDfvf3HdQSOmJL4IIS+TIpfV2IKt3Z8zM1vm43OvQnk2SZulw5jV7hLw/8v2T7B+Mr7znZpagz7BfHi77AITq5hdmc1LAezzMshNTjJhmFBvLL9/sO3w2F+k2qYLT9/HObvDzCLDqnByTXcX04N8N/frmMyDQcIbp/dwuQa4q3W4O7StBrCOqKSOLGn2FDKVqRUOplWQ2E66vj2DJ1cQ/ymUyth/5DiZBqaXLRKJ6Xbi3BiDZnVchNuJPEj2E02eYZCeLM/TM4aZU967/zM9zmUOXnfa4OgONL8UfDO9MTxU/cGJvfLpQRBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBED/D/wAvKl3Zj2EX3wAAAABJRU5ErkJggg==" alt="Travellers" style="width:100%">
+                        <div class="overlay">
+                            <div class="text">Add New Customers</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+
+</body>
+</html>

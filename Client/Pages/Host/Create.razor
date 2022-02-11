@@ -1,0 +1,19 @@
+﻿@page "/hosts/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>class="card-title">Add Host</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create Host" Host="Host" OnValidSubmit="@CreateHost" />
+
+@code {
+    Host Host = new Host();
+
+    private async Task CreateHost()
+    {
+        await _client.PostAsJsonAsync(Endpoints.HostEndpoint, Host);
+        _navManager.NavigateTo("/hosts/");
+    }
+}

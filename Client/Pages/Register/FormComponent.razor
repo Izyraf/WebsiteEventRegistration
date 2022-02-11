@@ -1,0 +1,67 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@Register" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>User Name: </label>
+            <div>
+                <InputSelect @bind-Value="Register.UserName" class="form-control">
+                    <option value="">-- Select User --</option>
+                    @if (Users != null)
+                    {
+                        foreach (var user in Users)
+                        {
+                            <option value="@user.ID">@user.UserName</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => Register.UserName)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Event Name: </label>
+            <div>
+                <InputSelect @bind-Value="Register.EventName" class="form-control">
+                    <option value="">-- Select Event --</option>
+                    @if (Events != null)
+                    {
+                        foreach (var Event in Events)
+                        {
+                            <option value="@Event.ID">@Event.EventName</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => Register.UserName)" />
+            </div>
+        </div>
+    </fieldset>
+
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="registers" />
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Register Register { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<User> Users;
+    private IList<Event> Events;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Users = await _client.GetFromJsonAsync<List<User>>($"{Endpoints.UserEndpoint}");
+        Events = await _client.GetFromJsonAsync<List<Event>>($"{Endpoints.EventEndpoint}");
+    }
+}
+

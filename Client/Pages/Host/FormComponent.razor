@@ -1,0 +1,36 @@
+﻿<EditForm Model="@Host" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Host Name: </label>
+            <div>
+                <InputText @bind-Value="@Host.HostName" class="form-control" />
+                <ValidationMessage For="@(() => Host.HostName)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Host Email: </label>
+            <div>
+                <InputText @bind-Value="@Host.HostEmail" class="form-control" />
+                <ValidationMessage For="@(() => Host.HostEmail)" />
+            </div>
+        </div>
+    </fieldset>
+
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="host" />
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Host Host { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

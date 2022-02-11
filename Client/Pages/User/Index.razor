@@ -1,0 +1,70 @@
+﻿@page "/users/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Users</h3>
+<br />
+<a href="/users/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Add User
+</a>
+
+@if (Users == null)
+{
+    <div class="alert alert-info">Loading Users...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var User in Users)
+            {
+                <tr>
+                    <td>@User.UserName</td>
+                    <td>@User.UserEmail</td>
+
+                    <td>
+                        <a href="/events/view/@User.ID" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/events/edit/@User.ID" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(User.ID))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<User> Users;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Users = await _client.GetFromJsonAsync<List<User>>("api/Users");
+    }
+
+    async Task Delete(int userId)
+    {
+        var User = Users.First(q => q.ID == userId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {User.UserName}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"api/Users/5/{userId}");
+            await OnInitializedAsync();
+        }
+    }
+}

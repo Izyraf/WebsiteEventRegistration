@@ -1,0 +1,84 @@
+﻿@page "/events/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">My events</h3>
+<br />
+<a href="/events/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create your own event
+</a>
+
+@if (Events == null)
+{
+    <div class="alert alert-info">Loading Events...</div>
+}
+else
+{
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Host</th>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Event Address</th>
+            <th>Event Capacity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+
+            @foreach (var Event in Events)
+            {
+
+                    <tr>
+                        @foreach (var Host in Hosts)
+                        {
+                            if (Event.HostID == Host.ID)
+                            {<td>@Host.HostName</td>}
+                        }
+                        <td>@Event.EventName</td>
+                        <td>@Event.EventDate</td>
+                        <td>@Event.EventAddress</td>
+                        <td>@Event.EventCapacity</td>
+                        <td>
+                            <a href="/events/view/@Event.ID" class="btn btn-primary">
+                                <span class="oi oi-book"></span>
+                            </a>
+                            <a href="/events/edit/@Event.ID" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                            <button class="btn btn-danger" @onclick="@(()=>Delete(Event.ID))">
+                                <span class="oi oi-delete"></span>
+                            </button>
+                        </td>
+                    </tr>
+            }
+    </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Event> Events;
+    private List<Host> Hosts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Events = await _client.GetFromJsonAsync<List<Event>>("api/Events");
+        Hosts = await _client.GetFromJsonAsync<List<Host>>("api/Hosts");
+    }
+
+    async Task Delete(int eventId)
+    {
+        var Event = Events.First(q => q.ID == eventId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {Event.EventName}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"api/Events/5/{eventId}");
+            await OnInitializedAsync();
+        }
+    }
+}

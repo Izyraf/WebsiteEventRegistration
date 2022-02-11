@@ -1,0 +1,90 @@
+﻿@page "/registers/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Register</h3>
+<br />
+<a href="/registers/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Register for event
+</a>
+
+@if (Registers == null)
+{
+    <div class="alert alert-info">My registered events...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Event Registered</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var Register in Registers)
+            {
+            <tr>
+                @foreach (var User in Users)
+                {
+                    if (Register.UserName == User.ID)
+
+
+                    {<td>@User.UserName</td>}
+
+                }
+                @foreach (var Event in Events)
+                {
+                    if (Register.EventName == Event.ID)
+
+                    {
+                        {<td>@Event.EventName</td>}
+}
+                }
+
+
+                <td>
+                    <a href="/events/view/@Register.ID" class="btn btn-primary">
+                        <span class="oi oi-book"></span>
+                    </a>
+                    <a href="/events/edit/@Register.ID" class="btn btn-warning">
+                        <span class="oi oi-pencil"></span>
+                    </a>
+                    <button class="btn btn-danger" @onclick="@(()=>Delete(Register.ID))">
+                        <span class="oi oi-delete"></span>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Register> Registers;
+    private List<User> Users;
+    private List<Event> Events;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Registers = await _client.GetFromJsonAsync<List<Register>>("api/Registers");
+        Users = await _client.GetFromJsonAsync<List<User>>("api/Users");
+        Events = await _client.GetFromJsonAsync<List<Event>>("api/Events");
+    }
+
+    async Task Delete(int registerId)
+    {
+        var Register = Registers.First(q => q.ID == registerId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {Register.Event.EventName}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"api/Registers/5/{registerId}");
+            await OnInitializedAsync();
+        }
+    }
+}

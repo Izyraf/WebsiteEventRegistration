@@ -1,0 +1,16 @@
+﻿body {
+    background: white;
+}
+
+h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: chartreuse;
+}
+
+#picture {
+    background-image: url('..//Event.jpeg');
+    background-position: center;
+    height: 100vh;
+}
+
+*/

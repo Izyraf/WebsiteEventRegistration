@@ -1,0 +1,70 @@
+﻿@page "/hosts/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Hosts</h3>
+<br />
+<a href="/hosts/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Add Host
+</a>
+
+@if (Hosts == null)
+{
+    <div class="alert alert-info">Loading Hosts...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Host Name</th>
+                <th>Host Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Host in Hosts)
+            {
+                <tr>
+                    <td>@Host.HostName</td>
+                    <td>@Host.HostEmail</td>
+                  
+                    <td>
+                        <a href="/events/view/@Host.ID" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/events/edit/@Host.ID" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Host.ID))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Host> Hosts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Hosts = await _client.GetFromJsonAsync<List<Host>>("api/Hosts");
+    }
+
+    async Task Delete(int hostId)
+    {
+        var Host = Hosts.First(q => q.ID == hostId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {Host.HostName}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"api/Hosts/5/{hostId}");
+            await OnInitializedAsync();
+        }
+    }
+}

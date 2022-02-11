@@ -1,0 +1,20 @@
+﻿@page "/events/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>class="card-title">Create your own event</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create Event" Event="Event" OnValidSubmit="@CreateEvent" />
+
+@code {
+    Event Event = new Event();
+
+    private async Task CreateEvent()
+    {
+        await _client.PostAsJsonAsync(Endpoints.EventEndpoint, Event);
+        _navManager.NavigateTo("/events/");
+    }
+}
+
